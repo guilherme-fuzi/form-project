@@ -35,7 +35,7 @@ public class Resposta {
 	
 	@ManyToOne
 	@JoinColumn(name="formulario_id", nullable=false)
-	private Formulario formulario;
+	private Colaborador colaborador;
 	
 	@OneToMany(mappedBy="resposta",cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ComplementoResposta> complementoResposta;

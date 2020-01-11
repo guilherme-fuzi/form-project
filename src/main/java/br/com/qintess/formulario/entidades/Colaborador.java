@@ -31,6 +31,6 @@ public class Colaborador {
 	private String email;
 	
 	@OneToMany(mappedBy="colaborador", cascade=CascadeType.ALL, orphanRemoval=true)
-	private List<Formulario> formularios;
+	private List<Resposta> respostas;
 
 }
