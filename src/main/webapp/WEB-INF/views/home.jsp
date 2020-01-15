@@ -13,6 +13,11 @@
 <c:import url="files.jsp"/>
 
 <style type="text/css">
+	
+	h2 {
+	  color: gray;
+	  text-shadow: 2px 2px 4px #000000;
+	}
 
 	body {
 		background-color: #232323;
@@ -53,7 +58,7 @@
 <body>
 
 	<div class="content">
-		<h2 style="color: gray;">Selecione seu perfil abaixo: </h2>
+		<h2>Selecione seu perfil abaixo: </h2>
 		<div class="btn-group" style="width: 50%;">
 		  <button type="submit" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    ESCOLHA

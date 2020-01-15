@@ -55,7 +55,19 @@
 	    margin-left: 120px;
 	    max-width: 80%;
 	}
+	
+	#card {
+		border-style: solid;
+		border-color: #4F4F4F;
+	}
 		
+	#card-header {
+		background-image: linear-gradient(to right, #232323, #232323, #4F4F4F);
+	}
+	
+	#card-body {
+		background-image: linear-gradient(to left, #232323, #232323, #4F4F4F);
+	}
 	
 </style>
 
@@ -104,11 +116,11 @@
 				<form:hidden path="listaResposta[${i.index}].questao"             value="${questao.id}"/>
 				<form:hidden path="listaComplementoResposta[${i.index}].resposta" value="${questao.id}"/> <!-- gerando lista complemento do mesmo tamanho da de questao -->
 				<div class="form-group">
-					<div class="card">
-						<div class="card-header">
+					<div class="card text-white" id="card">
+						<div class="card-header" id="card-header">
 							${questao.descricao}
 						</div>
-						<div class="card-body">
+						<div class="card-body" id="card-body">
 							<c:choose>
 								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'TEXTO'}">
@@ -137,7 +149,7 @@
 												<c:when test="${opcao.descricao == 'SIM' }">
 													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}	
 													<div id="complemento${questao.id}" class="text" style="display: none;">
-		   												<form:input path="listaComplementoResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Justifique ou descrevA qual(is)" id="complementoResposta" maxlength="100"/>
+		   												<form:input path="listaComplementoResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta" maxlength="100"/>
 		   											</div>
 												</c:when>
 											</c:choose>
