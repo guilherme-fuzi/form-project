@@ -13,6 +13,7 @@
 <c:import url="files.jsp"/>
 
 <style type="text/css">
+
 	
 	h2 {
 	  color: gray;
@@ -54,19 +55,18 @@
 
 </style>
 
-</head>
-<body>
+<script type="text/javascript">
 
+</script>
+
+</head>
+
+<body>
 	<div class="content">
 		<h2>Selecione seu perfil abaixo: </h2>
-		<div class="btn-group" style="width: 50%;">
-		  <button type="submit" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    ESCOLHA
-		  </button>
-		  <div class="dropdown-menu">
-		  	<a class="dropdown-item" href="/formulario-qintess">TÉCNICO</a>
-   			<a class="dropdown-item" href="/formulario-qintess">OPERACIONAL</a>
-		  </div>
+		<div class="container" style="width: 50%;">
+			<button onClick="window.location='/formulario-qintess/operacional';" class="btn btn-dark">Operacional</button>
+			<button onClick="window.location='/formulario-qintess/tecnico';" class="btn btn-dark">Técnico</button>			
 		</div>
 		<hr>
 	</div>

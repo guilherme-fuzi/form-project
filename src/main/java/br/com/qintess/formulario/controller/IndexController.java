@@ -21,9 +21,9 @@ public class IndexController {
 	@Autowired
 	private OpcoesQuestaoRepository opcoesQuestaoRepository;
 	
-	@RequestMapping
-	public String index(Model model){
-		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado());
+	@RequestMapping("/tecnico")
+	public String tecnico(Model model){
+		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(2));
 		model.addAttribute("listaOpcoesQuestao", opcoesQuestaoRepository.buscaOpcoesQuestaoOrdenado());
 		model.addAttribute("resposta", new Resposta());
 		model.addAttribute("respostaWrapper", new RespostaListaWrapper());
@@ -32,10 +32,21 @@ public class IndexController {
 		return "index";
 	}
 	
-	@RequestMapping("/home")
+	@RequestMapping("/operacional")
+	public String operacional(Model model) {
+		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(1));
+		model.addAttribute("listaOpcoesQuestao", opcoesQuestaoRepository.buscaOpcoesQuestaoOrdenado());
+		model.addAttribute("resposta", new Resposta());
+		model.addAttribute("respostaWrapper", new RespostaListaWrapper());
+		model.addAttribute("colaborador", new Colaborador());
+		
+		return "index";
+	}
+	
+	@RequestMapping
 	public String home(Model model) {
 		
 		return "home";
 	}
-	
+
 }
