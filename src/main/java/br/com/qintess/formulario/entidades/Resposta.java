@@ -1,5 +1,6 @@
 package br.com.qintess.formulario.entidades;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,13 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="resposta")
 @Getter
-@Setter
+@Setter   
 public class Resposta {
 	
 	@Id
@@ -29,12 +32,16 @@ public class Resposta {
 	@Column(name="descricao", nullable=false, length=250)
 	private String descricao;
 	
+	@Column(name="data_envio", nullable=false)
+	@CreationTimestamp
+	private Date data_envio;
+	
 	@ManyToOne
 	@JoinColumn(name="questao_id", nullable=false)
 	private Questao questao;
 	
 	@ManyToOne
-	@JoinColumn(name="formulario_id", nullable=false)
+	@JoinColumn(name="colaborador_id", nullable=false)
 	private Colaborador colaborador;
 	
 	@OneToMany(mappedBy="resposta",cascade=CascadeType.ALL, orphanRemoval=true)

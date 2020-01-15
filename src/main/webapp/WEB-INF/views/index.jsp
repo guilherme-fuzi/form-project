@@ -10,120 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Formulário - Qintess</title>
+
 <c:import url="files.jsp"/>
-
-<spring:url value="/formulario/salva" var="salva"></spring:url>
-	
-</head>
-	
-<body>
-	<header id="header">
-		<div class="container-fluid">
-			<!-- <div class="jumbotron mt-3 mb-3"> -->
-				<h3 align="left" style="color: white;">Bem vindo, {{ colaborador.nome }}</h3>
-				<p class="lead"  style="color: white;">Por favor, preencha o formulário</p>
-			
-		</div>
-	</header>
-	
-	<div class="container">
-		<form:form action="${salva}" modelAttribute="formulario">
-			<c:forEach items="${listaQuestoes}" var="questao">
-				<div class="form-group">
-					<div class="card">
-						<div class="card-header">
-							${questao.descricao}
-						</div>
-						<div class="card-body">
-							<c:choose>
-							
-								<c:when test="${questao.tipoEntradaQuestao.descricao == 'TEXTO'}">
-									<input type="text" class="form-control" placeholder="Questao ${questao.id}" id="questao${questao.id}">
-								</c:when>
-								
-								<c:when test="${questao.tipoEntradaQuestao.descricao == 'DROPDOWN'}">
-									<select name="selectOption" class="selectpicker">
-										<option selected>Escolha</option>
-										<c:forEach items="${listaOpcoesQuestao}" var="opcao">
-											<c:if test="${questao.id == opcao.questao.id}">
-												<option value="${opcao.descricao}">${opcao.descricao}</option>
-											</c:if>
-										</c:forEach> 
-									</select>
-								</c:when>
-								
-								<c:when test="${questao.tipoEntradaQuestao.descricao == 'CHECKBOX'}">
-									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
-										<c:if test="${questao.id == opcao.questao.id}">
-											<div class="custom-control custom-radio custom-control-inline"> 
-												<input type="radio" class="custom-control-input" id="radioOpcao${opcao.id}" name="questao${questao.id}" value="${opcao.descricao}" onclick="mostrar('complemento${questao.id}')" checked>
-	   											<label class="custom-control-label" for="radioOpcao${opcao.id}">${opcao.descricao}</label>
-	   											<c:if test="${opcao.descricao == 'SIM'}">
-		   											<div id="complemento${questao.id}" class="text">
-		   												<input type="text" id="complementoResposta${questao.id}" placeholder="QUAL(IS)?">
-		   											</div>
-   												</c:if>
-											</div>
-										</c:if>
-									</c:forEach>
-								</c:when>
-								
-								<c:when test="${questao.tipoEntradaQuestao.descricao == 'MULTICHECKBOX'}">
-									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
-										<c:if test="${questao.id == opcao.questao.id}">
-											<div class="custom-control custom-checkbox mb-3">
-												<input type="checkbox" class="custom-control-input" id="customCheck${opcao.id}" name="questao${questao.id}">
-										      	<label class="custom-control-label" for="customCheck${opcao.id}">${opcao.descricao}</label>
-										      	<input type="text" id="complementoResposta${questao.id}" placeholder="QUAL(IS)?" disabled>
-										    </div>
-										</c:if>
-									</c:forEach>
-								</c:when>
-								
-							</c:choose>
-						</div>
-					</div>
-				</div>				
-			</c:forEach>
-			
-			<button type="submit" class="btn btn-outline-dark btn-lg btn-block">SUBMIT</button>
-		</form:form>	
-	</div>
-	<br>
-	<footer id="footer">
-	<!-- 
-			<h4 style="color: white;">Innovation Obsessed</h4>
- 	-->
-	</footer>
-	
-</body>
-</html>
-
-<!-- JS -->
-<script type="text/javascript">
-	
-	$(document).ready(function () {
-		//$(".text").hide();
-	});
-	
-	
-	
-	function mostrar(el) {
-		var display = document.getElementById(el).style.display;
-		
-		if(display == "none") {
-			document.getElementById(el).style.display = 'block';	
-	    }
-	    else {
-	    	document.getElementById(el).style.display = 'none';
-	    }
-	}
-	
-	
-	
-</script>
-
-<!-- CSS -->
+<spring:url value="/respostas/salva" var="salva"></spring:url>
 
 <style type="text/css">
 
@@ -146,8 +35,6 @@
 		background-size: auto;
 		background-repeat: repeat;
 		background-color: #232323;
-		
-		
 		background-size: 60%;
 	}
 
@@ -168,7 +55,140 @@
 	    margin-left: 120px;
 	    max-width: 80%;
 	}
+		
 	
 </style>
- 	
 
+<script type="text/javascript">
+	
+	function ynCheck(elm, div, radio) {
+		if(radio != 'SIM'){
+			document.getElementById(div).style.display = "none";
+			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "");  
+			/*document.getElementById(div).style.visibility = "hidden";*/
+		} else {
+			document.getElementById(div).style.display = "inline-block";
+			document.getElementById(div).style.width = "86%";
+			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "false");
+			/*document.getElementById(div).style.visibility = "visible";*/
+		}
+	}
+
+	function enableCheckBox(div, chBox){
+		if(chBox.checked) {
+			document.getElementById(div).style.display = "inline-block";
+		} else {
+			document.getElementById(div).style.display = "none";
+		}
+	}
+	
+</script>
+	
+</head>
+	
+<body>
+	<header id="header">
+		<div class="container-fluid">
+			<!-- <div class="jumbotron mt-3 mb-3"> -->
+				<h3 align="left" style="color: white;">Bem vindo, {{ colaborador.nome }}</h3>
+				<p class="lead"  style="color: white;">Por favor, preencha o formulário</p>
+			
+		</div>
+	</header>
+	
+	<div class="container">
+		<form:form action="${salva}" modelAttribute="respostaWrapper" method="POST">
+
+			<c:forEach items="${listaQuestoes}" var="questao" varStatus="i">
+				<form:hidden path="listaResposta[${i.index}].colaborador"         value="1"/> <!-- id 1 temporario-->
+				<form:hidden path="listaResposta[${i.index}].questao"             value="${questao.id}"/>
+				<form:hidden path="listaComplementoResposta[${i.index}].resposta" value="${questao.id}"/> <!-- gerando lista complemento do mesmo tamanho da de questao -->
+				<div class="form-group">
+					<div class="card">
+						<div class="card-header">
+							${questao.descricao}
+						</div>
+						<div class="card-body">
+							<c:choose>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'TEXTO'}">
+									<form:input path="listaResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Questao ${questao.id}" id="questao${questao.id}" maxlength="200" style="width: 100%;" required="true"/>
+								</c:when>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'DROPDOWN'}">
+									<select name="selectOption" class="selectpicker">
+										<option selected>Escolha</option>
+										<c:forEach items="${listaOpcoesQuestao}" var="opcao">
+											<c:if test="${questao.id == opcao.questao.id}">
+												<option value="${opcao.descricao}">${opcao.descricao}</option>
+											</c:if>
+										</c:forEach> 
+									</select>
+								</c:when>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'CHECKBOX'}">
+									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
+										<c:if test="${questao.id == opcao.questao.id}">
+											
+											<c:choose>
+												<c:when test="${opcao.descricao == 'NAO' }">
+													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}"  onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
+												</c:when>
+												<c:when test="${opcao.descricao == 'SIM' }">
+													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}	
+													<div id="complemento${questao.id}" class="text" style="display: none;">
+		   												<form:input path="listaComplementoResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Justifique ou descrevA qual(is)" id="complementoResposta" maxlength="100"/>
+		   											</div>
+												</c:when>
+											</c:choose>
+											
+										</c:if>
+									</c:forEach>
+								</c:when>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'MULTICHECKBOX'}">
+									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
+										<c:if test="${questao.id == opcao.questao.id}">
+											<div class="custom-control custom-checkbox mb-3">
+												<input type="checkbox" value="${opcao.descricao}" class="custom-control-input" id="customCheck${opcao.id}" name="listaResposta[${i.index}].descricao" onclick="enableCheckBox('complementoResposta${opcao.id}',this)">
+										      	<label class="custom-control-label" for="customCheck${opcao.id}">${opcao.descricao}</label>
+										      	<input name="listaComplementoResposta[${i.index}].descricao" type="text" id="complementoResposta${opcao.id}" placeholder="Qual(is)?" style="display: none;" maxlength="100">
+										    </div>
+										</c:if>
+									</c:forEach>
+									
+								</c:when>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'FILHO' }">
+								
+									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
+										<c:if test="${questao.id == opcao.questao.id}">
+												
+											<c:if test="${opcao.descricao == 'NAO' }">
+												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
+											</c:if>
+											<c:if test="${opcao.descricao == 'SIM' }">
+												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
+													<div id="complemento${questao.id}" class="text" style="display: none;">
+														<input name="listaResposta[${i.index}].descricao" type="text" class="text" placeholder="Quantos?" id="qtdeFilho">
+														<input name="listaComplementoResposta[${i.index}].descricao" type="text" class="text" placeholder="Idade(s)" >
+													</div>
+											</c:if>	
+										</c:if>
+									</c:forEach>
+								</c:when>
+								
+							</c:choose>
+						</div>
+					</div>
+				</div>				
+			</c:forEach>
+			
+			<button type="submit" class="btn btn-outline-dark btn-lg btn-block">SUBMIT</button>
+		</form:form>	
+	</div>
+	<br>
+	<footer id="footer">
+	</footer>	
+</body>
+</html>
