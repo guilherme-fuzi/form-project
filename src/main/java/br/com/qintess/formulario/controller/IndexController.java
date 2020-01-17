@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.qintess.formulario.dao.OpcoesQuestaoRepository;
 import br.com.qintess.formulario.dao.QuestaoRepository;
+import br.com.qintess.formulario.dao.RespostaRepository;
 import br.com.qintess.formulario.dao.TipoEntradaQuestaoRepository;
 import br.com.qintess.formulario.entidades.Colaborador;
 import br.com.qintess.formulario.entidades.Resposta;
@@ -23,6 +24,9 @@ public class IndexController {
 	
 	@Autowired
 	private TipoEntradaQuestaoRepository tipoEntradaQuestaoRepository;
+	
+	@Autowired
+	private RespostaRepository respostaRepository;
 	
 	@RequestMapping
 	public String home(Model model) {
@@ -56,6 +60,7 @@ public class IndexController {
 	
 	@RequestMapping("/relatorio")
 	public String relatorio(Model model) {
+		model.addAttribute("dadosResposta", respostaRepository.buscaRespostaOrdenado());
 		
 		return "relatorio";
 	}

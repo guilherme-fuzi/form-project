@@ -11,17 +11,22 @@
 <meta charset="UTF-8">
 <title>Relatório</title>
 
-<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
-<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table-locale-all.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.min.js"></script>
-
-<c:import url="files.jsp"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 
 <style type="text/css">
 	body {
-		background-color: #232323;
+		background-color: gray;
+	}
+	
+	.container {
+		width: 50%;
+	}
+	
+	thead {
+		text-align: center;
 	}
 </style>
 
@@ -33,38 +38,59 @@
 
 </head>
 <body>
-	<h1 style="color: white; text-align: center;">DADOS</h1>
+	<h1 style="color: white; text-align: center;">Dados</h1>
 	<br>
-	<div class="container-fluid">
-		<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%; color: white;">
+	
+	<div class="container">
+		<table id="table1" style="width:100%; color: white;" class="table table-striped table-bordered dt-responsive nowrap">
 			<thead>
 				<tr>
-					<th>QUESTÃO</th>
+					<th>ID</th>
 					<th>RESPOSTA</th>
 					<th>DATA DE ENVIO</th>
+					<th>ID QUESTAO</th>
 					<th>ID FUNCIONARIO</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${dadosBanco}" var="data">
+				<c:forEach items="${dadosResposta}" var="data">
 					<tr>
-						<th>${data.questao}</th>
-						<th>${data.resposta}</th>
-						<th>${data.data_envio}</th>
-						<th>${data.id_colab}</th>
+						<th align="center">${data.id}</th>
+						<th>${data.descricao}</th>
+						<th align="center">${data.data_envio}</th>
+						<th align="center">${data.questao.id}</th>
+						<th align="center">${data.colaborador.id}</th>
 					</tr>
 				</c:forEach>	 
 				
 			</tbody>
-			<tfoot>
-				<tr>
-					<th>QUESTÃO</th>
-					<th>RESPOSTA</th>
-					<th>DATA DE ENVIO</th>
-					<th>ID FUNCIONARIO</th>
-				</tr>
-			</tfoot>
 		</table>
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+	    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+	    <script>
+		$(document).ready(function() {
+		    var table = $('#table1').DataTable( {
+		        lengthChange: false,
+		        buttons: [ 'copy', 'excel', 'csv', 'pdf', 'colvis' ]
+		    } );
+		 
+		    table.buttons().container()
+		        .appendTo( '#table1_wrapper .col-md-6:eq(0)' );
+		} );
+	     </script>
+		
 	</div>
 	
 </body>

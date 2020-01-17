@@ -19,4 +19,5 @@ public interface QuestaoRepository extends JpaRepository<Questao, Integer>{
 				 "	AND (tq.id = 3 OR tq.id = :id)\n" + 
 				 "ORDER BY q.id", nativeQuery=true)
 	List<Questao> buscaQuestaoOrdenado(@Param("id") int idEntrada);
+
 }
