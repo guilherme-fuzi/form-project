@@ -48,7 +48,6 @@ public class Resposta {
 	@OneToMany(mappedBy="resposta", cascade = CascadeType.ALL)
 	private List<ComplementoResposta> complementoResposta;
 	
-	//mudanças aqui
 	public void add(ComplementoResposta compResposta) {
 		this.complementoResposta.add(compResposta);
 	}

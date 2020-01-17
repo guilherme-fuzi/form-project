@@ -32,44 +32,25 @@ public class RespostaController {
 	
 	@RequestMapping("respostas/salva")
 	public String salva(@ModelAttribute RespostaListaWrapper respostas, @RequestParam("selectOption") String[] selectOpcao) {
-		
 		respostas = OpcaoRespostaBind(selectOpcao, respostas);
 		respostas = ComplementoRespostaBind(respostas);
 		
 		for (Resposta r : respostas.getListaResposta()) {			
 			if(r.getQuestao().getDescricao() != null && r.getDescricao() != null) {
-				
-				/*
-				 * System.out.println("QUESTAO: " + r.getQuestao().getDescricao());
-				 * System.out.println("RESPOSTA: " + r.getDescricao());
-				 * System.out.println("------------");
-				 */
-				
 				respostaRepository.save(r);
 			}	
 		}
 
 		for (ComplementoResposta cr : respostas.getListaComplementoResposta()) {
 			if(cr.getResposta() != null && cr.getResposta().getDescricao() != null && cr.getDescricao() != null) {
-				//printando os complementos prestes a serem salvos
-				/*
-				 * System.out.println("RESPOSTA: " + cr.getResposta().getDescricao());
-				 * System.out.println("COMPLEMENTO: " + cr.getDescricao());
-				 * System.out.println("------------");
-				 */
-				
 				complementoRespostaRepository.save(cr);
 			}
 		}
-		System.out.println("Size of ListaResposta: " + respostas.getListaResposta().size() +
-						 "\nSize of ListaComplementoRespostas: " + respostas.getListaComplementoResposta().size());
-
-		
+				
 		return "redirect:/";
 	}
 	
 	private RespostaListaWrapper OpcaoRespostaBind(String[] opcoes, RespostaListaWrapper respostas) {
-		
 		for (String str : opcoes) {
 			Integer questaoId = opcoesRepository.buscaQuestaoIdPelaOpcao(str); 
 			if(questaoId != null) {
@@ -86,9 +67,7 @@ public class RespostaController {
 		return respostas;
 	}
 	
-	
 	private RespostaListaWrapper ComplementoRespostaBind(RespostaListaWrapper respostas) {
-
 		for(int i = 0; i < respostas.getListaComplementoResposta().size() && i < respostas.getListaResposta().size(); i++) {
 				if( (respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("MULTICHECKBOX")
 						|| respostas.getListaResposta().get(i).getDescricao().contentEquals("SIM")

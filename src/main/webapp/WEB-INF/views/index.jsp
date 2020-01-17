@@ -19,12 +19,12 @@
 		if(radio != 'SIM'){
 			document.getElementById(div).style.display = "none";
 			document.getElementById(div).setAttribute("disabled", "true");
-			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "true");*/  
+			document.getElementById(div).getElementsByTagName('INPUT')[0].removeAttribute("required");
 		} else {
 			document.getElementById(div).style.display = "inline-block";
 			document.getElementById(div).style.width = "86%";
 			document.getElementById(div).removeAttribute("disabled");
-			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "false");*/
+			document.getElementById(div).getElementsByTagName('INPUT')[0].setAttribute("required", "true");
 		}
 	}
 	
@@ -61,7 +61,6 @@
 		<div class="container-fluid">
 				<h3 align="left" style="color: white;">Bem vindo, {{ colaborador.nome }}</h3>
 				<p class="lead"  style="color: white;">Por favor, preencha o formulário</p>
-				
 		</div>
 	</header>
 	
@@ -106,8 +105,7 @@
 												<c:when test="${opcao.descricao == 'SIM' }">
 													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}	
 													<div id="complemento${questao.id}" class="text" style="display: none;">
-		   												<form:input path="listaComplementoResposta[${i.index}].descricao" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta" maxlength="100" disabled="disabled"/>
-		   											<!-- mudei a linha de cima -->
+		   												<form:input path="listaComplementoResposta[${i.index}].descricao" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta${opcao.id}" maxlength="100" disabled="disabled" required="required"/>
 		   											</div>
 												</c:when>
 											</c:choose>
@@ -123,7 +121,6 @@
 												<input type="checkbox" value="${opcao.descricao}" class="custom-control-input" id="customCheck${opcao.id}" name="listaResposta[${i.index}].descricao" onclick="enableCheckBox('complementoResposta${opcao.id}',this)">
 										      	<label class="custom-control-label" for="customCheck${opcao.id}">${opcao.descricao}</label>
 										      	<input name="listaComplementoResposta[${i.index}].descricao" id="complementoResposta${opcao.id}" placeholder="Qual(is)?" style="display: none; width: 350px;" maxlength="100" disabled="disabled">
-										   	<!-- mudei a linha de cima -->
 										    </div>
 										</c:if>
 									</c:forEach>
@@ -141,9 +138,8 @@
 											<c:if test="${opcao.descricao == 'SIM' }">
 												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck2(this, 'complemento${questao.id}', qtdeFilho, idadeFilho, '${opcao.descricao}')"/>${opcao.descricao}
 													<div id="complemento${questao.id}" style="display: none;">
-														<input name="listaResposta[${i.index}].descricao" type="number" min="1" placeholder="Quantos?" id="qtdeFilho">
+														<input name="listaResposta[${i.index}].descricao" type="number" min="1" placeholder="Quantos?" id="qtdeFilho" style="width: 25%; text-align: center;">
 														<input name="listaComplementoResposta[${i.index}].descricao" class="text" placeholder="Idade(s)" id="idadeFilho" >
-														<!-- mudei a linha de cima -->
 													</div>
 											</c:if>	
 										</c:if>

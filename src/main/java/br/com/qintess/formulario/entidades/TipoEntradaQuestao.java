@@ -30,5 +30,4 @@ public class TipoEntradaQuestao {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="tipoEntradaQuestao")
 	private List<Questao> questoes;
 	
-	
 }
