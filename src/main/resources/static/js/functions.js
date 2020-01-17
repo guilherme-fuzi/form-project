@@ -1,13 +1,13 @@
 function ynCheck(elm, div, radio) {
 		if(radio != 'SIM'){
 			document.getElementById(div).style.display = "none";
-			document.getElementById(div).setAttribute("disabled", "true");
+			document.getElementById(div).getElementsByTagName('INPUT')[0].setAttribute("disabled", "true");
 			document.getElementById(div).getElementsByTagName('INPUT')[0].removeAttribute("required");
 			document.getElementById(div).getElementsByTagName('INPUT')[0].value = '';
 		} else {
 			document.getElementById(div).style.display = "inline-block";
 			document.getElementById(div).style.width = "86%";
-			document.getElementById(div).removeAttribute("disabled");
+			document.getElementById(div).getElementsByTagName('INPUT')[0].removeAttribute("disabled");
 			document.getElementById(div).getElementsByTagName('INPUT')[0].setAttribute("required", "true");
 		}
 	}

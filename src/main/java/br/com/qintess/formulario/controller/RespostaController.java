@@ -70,7 +70,7 @@ public class RespostaController {
 	private RespostaListaWrapper ComplementoRespostaBind(RespostaListaWrapper respostas) {
 		for(int i = 0; i < respostas.getListaComplementoResposta().size() && i < respostas.getListaResposta().size(); i++) {
 				if( (respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("MULTICHECKBOX")
-						|| !respostas.getListaResposta().get(i).getDescricao().contentEquals("NAO")
+						|| respostas.getListaResposta().get(i).getDescricao().equals("SIM")
 						|| respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("DROPDOWN-MULTIPLE")
 						|| respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("FILHO")
 							&& respostas.getListaResposta().get(i).getDescricao().contentEquals("SIM"))

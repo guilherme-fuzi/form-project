@@ -9,8 +9,8 @@ INSERT INTO tipo_entrada_questao(descricao) VALUES('MULTICHECKBOX');
 INSERT INTO tipo_entrada_questao(descricao) VALUES('FILHO');
 INSERT INTO tipo_entrada_questao(descricao) VALUES('DROPDOWN-MULTIPLE');
 
-INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('DESCREVA ABAIXO A(S) PRINCIPAL(IS) TECNOLOGIAS E/OU ATIVIDADES.', 1, 3);
-INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('CITE QUAIS SÃO AS TECNOLOGIAS QUE VOCÊ MAIS UTILIZA NO SEU DIA-A-DIA.', 1, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('DESCREVA ABAIXO SUAS PRINCIPAL(IS) ATIVIDADE(S).', 1, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('CITE QUAIS SÃO AS FERRAMENTAS/TECNOLOGIAS QUE VOCÊ MAIS UTILIZA NO SEU DIA-A-DIA.', 1, 3);
 INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('VOCÊ POSSUI CONHECIMENTO EM OUTRA(S) TECNOLOGIA(S)? SE SIM, QUAL(IS)?', 3, 3);
 INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('SELECIONE SUA FORMAÇÃO ACADÊMICA', 2, 3);
 INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('POSSUI CERTIFICAÇÕES? SE SIM, QUAL(IS)?', 3, 3);

@@ -61,7 +61,7 @@
 												<c:when test="${opcao.descricao == 'SIM' }">
 													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}	
 													<div id="complemento${questao.id}" class="text" style="display: none;">
-		   												<form:input path="listaComplementoResposta[${i.index}].descricao" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta${opcao.id}" maxlength="100" disabled="disabled" required="required"/>
+		   												<input name="listaComplementoResposta[${i.index}].descricao" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta${opcao.id}" maxlength="100" disabled="disabled" required="required"/>
 		   											</div>
 												</c:when>
 											</c:choose>
