@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.qintess.formulario.dao.OpcoesQuestaoRepository;
 import br.com.qintess.formulario.dao.QuestaoRepository;
+import br.com.qintess.formulario.dao.TipoEntradaQuestaoRepository;
 import br.com.qintess.formulario.entidades.Colaborador;
-import br.com.qintess.formulario.entidades.ComplementoResposta;
 import br.com.qintess.formulario.entidades.Resposta;
 import br.com.qintess.formulario.wrapper.RespostaListaWrapper;
 
@@ -21,9 +21,19 @@ public class IndexController {
 	@Autowired
 	private OpcoesQuestaoRepository opcoesQuestaoRepository;
 	
+	@Autowired
+	private TipoEntradaQuestaoRepository tipoEntradaQuestaoRepository;
+	
+	@RequestMapping
+	public String home(Model model) {
+		
+		return "home";
+	}
+	
 	@RequestMapping("/tecnico")
 	public String tecnico(Model model){
-		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(2));
+		int idTipoEntrada = tipoEntradaQuestaoRepository.buscaTipoQuestaoId("TECNICO");
+		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(idTipoEntrada));
 		model.addAttribute("listaOpcoesQuestao", opcoesQuestaoRepository.buscaOpcoesQuestaoOrdenado());
 		model.addAttribute("resposta", new Resposta());
 		model.addAttribute("respostaWrapper", new RespostaListaWrapper());
@@ -34,7 +44,8 @@ public class IndexController {
 	
 	@RequestMapping("/operacional")
 	public String operacional(Model model) {
-		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(1));
+		int idTipoEntrada = tipoEntradaQuestaoRepository.buscaTipoQuestaoId("OPERACIONAL");
+		model.addAttribute("listaQuestoes", questaoRepository.buscaQuestaoOrdenado(idTipoEntrada));
 		model.addAttribute("listaOpcoesQuestao", opcoesQuestaoRepository.buscaOpcoesQuestaoOrdenado());
 		model.addAttribute("resposta", new Resposta());
 		model.addAttribute("respostaWrapper", new RespostaListaWrapper());
@@ -43,10 +54,11 @@ public class IndexController {
 		return "index";
 	}
 	
-	@RequestMapping
-	public String home(Model model) {
+	@RequestMapping("/relatorio")
+	public String relatorio(Model model) {
+		model.addAttribute("data", questaoRepository.findAll());
 		
-		return "home";
+		return "relatorio";
 	}
 
 }

@@ -1,6 +1,7 @@
 package br.com.qintess.formulario.entidades;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,14 +38,22 @@ public class Resposta {
 	private Date data_envio;
 	
 	@ManyToOne
-	@JoinColumn(name="questao_id", nullable=false)
+	@JoinColumn(name="questao_id")
 	private Questao questao;
 	
 	@ManyToOne
 	@JoinColumn(name="colaborador_id", nullable=false)
 	private Colaborador colaborador;
 	
-	@OneToMany(mappedBy="resposta",cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy="resposta", cascade = CascadeType.ALL)
 	private List<ComplementoResposta> complementoResposta;
 	
+	//mudanças aqui
+	public void add(ComplementoResposta compResposta) {
+		this.complementoResposta.add(compResposta);
+	}
+	
+	public Resposta() {
+		this.complementoResposta = new ArrayList<ComplementoResposta>();
+	}
 }

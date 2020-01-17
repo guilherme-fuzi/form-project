@@ -10,101 +10,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Formulário - Qintess</title>
-
 <c:import url="files.jsp"/>
-<spring:url value="/respostas/salva" var="salva"></spring:url>
-
-<style type="text/css">
-
-	header {
-	  width: 60%;
-	  background-color: #232323;
-	  text-align: left;
-	  padding: 15px;
-	  margin-right: 120px;
-  	  margin-left: 120px;
-  	  margin-bottom: 15px;
-  	  background-image: url("images/motion_marca2.gif");
-  	  background-repeat: no-repeat;
-  	  background-position: right;
-	} 	
-
-	body {
-		color: black;
-		background-image: linear-gradient(#232323, #232323, #6A26DF, #9F358F, #D44540); 
-		background-size: auto;
-		background-repeat: repeat;
-		background-color: #232323;
-		background-size: 60%;
-	}
-
-	footer {
-		height: 85px;
-		background-color: #232323;
-		background-image: url("images/symbol.png");
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: 4%; 
-	}
-	
-	.container {
-	    width: 60%;
-	    padding-right: 8px;
-	    padding-left: 8px;
-	    margin-right: auto;
-	    margin-left: 120px;
-	    max-width: 80%;
-	}
-	
-	#card {
-		border-style: solid;
-		border-color: #4F4F4F;
-	}
-		
-	#card-header {
-		background-image: linear-gradient(to right, #232323, #232323, #4F4F4F);
-	}
-	
-	#card-body {
-		background-image: linear-gradient(to left, #232323, #232323, #4F4F4F);
-	}
-	
-</style>
+<link rel="stylesheet" type="text/css" href='<spring:url value="/css/modify.css"/>'>
 
 <script type="text/javascript">
-	
+
 	function ynCheck(elm, div, radio) {
 		if(radio != 'SIM'){
 			document.getElementById(div).style.display = "none";
-			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "");  
-			/*document.getElementById(div).style.visibility = "hidden";*/
+			document.getElementById(div).setAttribute("disabled", "true");
+			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "true");*/  
 		} else {
 			document.getElementById(div).style.display = "inline-block";
 			document.getElementById(div).style.width = "86%";
-			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "false");
-			/*document.getElementById(div).style.visibility = "visible";*/
-		}
-	}
-
-	function enableCheckBox(div, chBox){
-		if(chBox.checked) {
-			document.getElementById(div).style.display = "inline-block";
-		} else {
-			document.getElementById(div).style.display = "none";
+			document.getElementById(div).removeAttribute("disabled");
+			/*document.getElementById(div).querySelectorAll("input").setAttribute("required", "false");*/
 		}
 	}
 	
+	function ynCheck2(elm, div, qtdeF, idade, radio) {
+		if(radio != 'SIM'){
+			document.getElementById(div).style.display = "none";
+			document.getElementById(qtdeF).setAttribute("disabled", "true");
+			document.getElementById(idade).setAttribute("disabled", "true");
+		} else {
+			document.getElementById(div).style.display = "inline-block";
+			document.getElementById(qtdeF).removeAttribute("disabled");
+			document.getElementById(idade).removeAttribute("disabled");
+		}
+	}
+	
+	function enableCheckBox(div, chBox){
+			if(chBox.checked) {
+				document.getElementById(div).style.display = "inline-block";
+	      		document.getElementById(div).removeAttribute("disabled");
+			} else {
+				document.getElementById(div).style.display = "none";
+				document.getElementById(div).setAttribute("disabled", "true");
+			}
+		}
+
 </script>
+
+<spring:url value="/respostas/salva" var="salva"></spring:url>
 	
 </head>
 	
 <body>
-	<header id="header">
+	<header style="background-image: url('images/motion_marca2.gif');">
 		<div class="container-fluid">
-			<!-- <div class="jumbotron mt-3 mb-3"> -->
 				<h3 align="left" style="color: white;">Bem vindo, {{ colaborador.nome }}</h3>
 				<p class="lead"  style="color: white;">Por favor, preencha o formulário</p>
-			
+				
 		</div>
 	</header>
 	
@@ -149,7 +106,8 @@
 												<c:when test="${opcao.descricao == 'SIM' }">
 													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}	
 													<div id="complemento${questao.id}" class="text" style="display: none;">
-		   												<form:input path="listaComplementoResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta" maxlength="100"/>
+		   												<form:input path="listaComplementoResposta[${i.index}].descricao" class="form-control" placeholder="Justifique ou descreva qual(is)" id="complementoResposta" maxlength="100" disabled="disabled"/>
+		   											<!-- mudei a linha de cima -->
 		   											</div>
 												</c:when>
 											</c:choose>
@@ -164,7 +122,8 @@
 											<div class="custom-control custom-checkbox mb-3">
 												<input type="checkbox" value="${opcao.descricao}" class="custom-control-input" id="customCheck${opcao.id}" name="listaResposta[${i.index}].descricao" onclick="enableCheckBox('complementoResposta${opcao.id}',this)">
 										      	<label class="custom-control-label" for="customCheck${opcao.id}">${opcao.descricao}</label>
-										      	<input name="listaComplementoResposta[${i.index}].descricao" type="text" id="complementoResposta${opcao.id}" placeholder="Qual(is)?" style="display: none;" maxlength="100">
+										      	<input name="listaComplementoResposta[${i.index}].descricao" id="complementoResposta${opcao.id}" placeholder="Qual(is)?" style="display: none; width: 350px;" maxlength="100" disabled="disabled">
+										   	<!-- mudei a linha de cima -->
 										    </div>
 										</c:if>
 									</c:forEach>
@@ -177,17 +136,28 @@
 										<c:if test="${questao.id == opcao.questao.id}">
 												
 											<c:if test="${opcao.descricao == 'NAO' }">
-												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
+												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck2(this, 'complemento${questao.id}', qtdeFilho, idadeFilho, '${opcao.descricao}')"/>${opcao.descricao}
 											</c:if>
 											<c:if test="${opcao.descricao == 'SIM' }">
-												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
-													<div id="complemento${questao.id}" class="text" style="display: none;">
-														<input name="listaResposta[${i.index}].descricao" type="text" class="text" placeholder="Quantos?" id="qtdeFilho">
-														<input name="listaComplementoResposta[${i.index}].descricao" type="text" class="text" placeholder="Idade(s)" >
+												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck2(this, 'complemento${questao.id}', qtdeFilho, idadeFilho, '${opcao.descricao}')"/>${opcao.descricao}
+													<div id="complemento${questao.id}" style="display: none;">
+														<input name="listaResposta[${i.index}].descricao" type="number" min="1" placeholder="Quantos?" id="qtdeFilho">
+														<input name="listaComplementoResposta[${i.index}].descricao" class="text" placeholder="Idade(s)" id="idadeFilho" >
+														<!-- mudei a linha de cima -->
 													</div>
 											</c:if>	
 										</c:if>
 									</c:forEach>
+								</c:when>
+								
+								<c:when test="${questao.tipoEntradaQuestao.descricao == 'DROPDOWN-MULTIPLE' }">
+									<select name="listaResposta[${i.index}].descricao" class="selectpicker" multiple>
+										<c:forEach items="${listaOpcoesQuestao}" var="opcao">
+											<c:if test="${questao.id == opcao.questao.id}">
+												<option value="${opcao.descricao}">${opcao.descricao}</option>
+											</c:if>
+										</c:forEach>
+									</select>
 								</c:when>
 								
 							</c:choose>
@@ -200,7 +170,7 @@
 		</form:form>	
 	</div>
 	<br>
-	<footer id="footer">
+	<footer id="footer" style="background-image: url('images/symbol.png');">
 	</footer>	
 </body>
 </html>
