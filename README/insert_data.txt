@@ -1,0 +1,69 @@
+INSERT INTO tipo_questao(descricao) VALUES('OPERACIONAL');
+INSERT INTO tipo_questao(descricao) VALUES('TECNICO');
+INSERT INTO tipo_questao(descricao) VALUES('GERAL');
+
+INSERT INTO tipo_entrada_questao(descricao) VALUES('TEXTO');
+INSERT INTO tipo_entrada_questao(descricao) VALUES('DROPDOWN');
+INSERT INTO tipo_entrada_questao(descricao) VALUES('CHECKBOX');
+INSERT INTO tipo_entrada_questao(descricao) VALUES('MULTICHECKBOX');
+INSERT INTO tipo_entrada_questao(descricao) VALUES('FILHO');
+INSERT INTO tipo_entrada_questao(descricao) VALUES('DROPDOWN-MULTIPLE');
+
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('DESCREVA ABAIXO A(S) PRINCIPAL(IS) TECNOLOGIAS E/OU ATIVIDADES.', 1, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('CITE QUAIS SÃO AS TECNOLOGIAS QUE VOCÊ MAIS UTILIZA NO SEU DIA-A-DIA.', 1, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('VOCÊ POSSUI CONHECIMENTO EM OUTRA(S) TECNOLOGIA(S)? SE SIM, QUAL(IS)?', 3, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('SELECIONE SUA FORMAÇÃO ACADÊMICA', 2, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('POSSUI CERTIFICAÇÕES? SE SIM, QUAL(IS)?', 3, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('SELECIONE SEU TEMPO DE EXPERIÊNCIA NO SEU CARGO ATUAL', 2, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('QUAIS IDIOMAS TEM CONHECIMENTO ALÉM DA SUA LÍNGUA NATIVA?', 6, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('VOCÊ POSSUI RESTRIÇÃO DE LOCAL DE ATUAÇÃO? DESCREVA', 3, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('TEM INTERESSE EM ATUAR EM OUTRA ÁREA? SE SIM, QUAL?', 3, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('POSSUI FILHOS?', 5, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('QUAIS BENEFÍCIOS GOSTARIA DE TER?', 1, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('ESCOLHA TEMAS QUE GOSTARIA DE APRENDER.', 4, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('ESCOLHA TEMAS QUE GOSTARIA DE ENSINAR.', 4, 3);
+INSERT INTO questao(descricao, tipo_entrada_questao_id, tipo_questao_id) VALUES('DESCREVA SOBRE O DENTISTA DE CANARIO', 1, 1);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('ENSINO MEDIO', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('ENSINO SUPERIOR', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('POS-GRADUACAO', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('MBA', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('MESTRADO', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('DOUTORADO', 4);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('PHD', 4);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('MENOS DE 1 ANO', 6);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('1 A 2 ANOS', 6);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('3 a 5 ANOS', 6);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('MAIS DE 5 ANOS', 6);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('INGLES', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('ESPANHOL', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('ITALIANO', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('FRANCES', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('ALEMAO', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('MANDARIM', 7);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('OUTRO(S)', 7);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('NAO', 3);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('SIM', 3);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('NAO', 5);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('SIM', 5);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('NAO', 8);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('SIM', 8);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('NAO', 9);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('SIM', 9);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('NAO', 10);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('SIM', 10);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('TECNOLOGIA', 12);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('IDIOMA', 12);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('OUTRO', 12);
+
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('TECNOLOGIA', 13);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('IDIOMA', 13);
+INSERT INTO opcoes_questao(descricao, questao_id) VALUES('OUTRO', 13);
+
+INSERT INTO colaborador(nome, email) VALUES('josue', 'jojo@qintess.com')
+
+

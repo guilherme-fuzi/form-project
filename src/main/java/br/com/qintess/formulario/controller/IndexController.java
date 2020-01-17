@@ -56,7 +56,6 @@ public class IndexController {
 	
 	@RequestMapping("/relatorio")
 	public String relatorio(Model model) {
-		model.addAttribute("data", questaoRepository.findAll());
 		
 		return "relatorio";
 	}

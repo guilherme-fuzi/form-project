@@ -54,10 +54,10 @@ public class RespostaController {
 		for (String str : opcoes) {
 			Integer questaoId = opcoesRepository.buscaQuestaoIdPelaOpcao(str); 
 			if(questaoId != null) {
-				Questao q = questaoRepository.findById(opcoesRepository.buscaQuestaoIdPelaOpcao(str)).get(); //procura questao atraves descricao da resposta
-				for(Resposta r : respostas.getListaResposta()) { //precisamos saber em qual questao devemos colocar a opcao, portanto percorremos a lista das respostas,									
-					if(q.getId() == r.getQuestao().getId()) {	 //comparamos com a questao 'q' para encontrar o lugar correto na lista
-						r.setDescricao(str);					 //por fim adicinamos a questao 'q' a lista de respostas
+				Questao q = questaoRepository.findById(opcoesRepository.buscaQuestaoIdPelaOpcao(str)).get(); 
+				for(Resposta r : respostas.getListaResposta()) { 									
+					if(q.getId() == r.getQuestao().getId()) {	 
+						r.setDescricao(str);					 
 						r.setQuestao(q);
 					}
 				}	
@@ -70,8 +70,10 @@ public class RespostaController {
 	private RespostaListaWrapper ComplementoRespostaBind(RespostaListaWrapper respostas) {
 		for(int i = 0; i < respostas.getListaComplementoResposta().size() && i < respostas.getListaResposta().size(); i++) {
 				if( (respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("MULTICHECKBOX")
-						|| respostas.getListaResposta().get(i).getDescricao().contentEquals("SIM")
-						|| respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("DROPDOWN-MULTIPLE"))
+						|| !respostas.getListaResposta().get(i).getDescricao().contentEquals("NAO")
+						|| respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("DROPDOWN-MULTIPLE")
+						|| respostas.getListaResposta().get(i).getQuestao().getTipoEntradaQuestao().getDescricao().equals("FILHO")
+							&& respostas.getListaResposta().get(i).getDescricao().contentEquals("SIM"))
 						&& respostas.getListaResposta().get(i) != null
 						&& respostas.getListaResposta().get(i).getDescricao() != null) {
 					Resposta respostaAux = respostas.getListaResposta().get(i);

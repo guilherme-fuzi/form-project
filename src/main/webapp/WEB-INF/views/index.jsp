@@ -10,52 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Formulário - Qintess</title>
+
 <c:import url="files.jsp"/>
-<link rel="stylesheet" type="text/css" href='<spring:url value="/css/modify.css"/>'>
-
-<script type="text/javascript">
-
-	function ynCheck(elm, div, radio) {
-		if(radio != 'SIM'){
-			document.getElementById(div).style.display = "none";
-			document.getElementById(div).setAttribute("disabled", "true");
-			document.getElementById(div).getElementsByTagName('INPUT')[0].removeAttribute("required");
-		} else {
-			document.getElementById(div).style.display = "inline-block";
-			document.getElementById(div).style.width = "86%";
-			document.getElementById(div).removeAttribute("disabled");
-			document.getElementById(div).getElementsByTagName('INPUT')[0].setAttribute("required", "true");
-		}
-	}
-	
-	function ynCheck2(elm, div, qtdeF, idade, radio) {
-		if(radio != 'SIM'){
-			document.getElementById(div).style.display = "none";
-			document.getElementById(qtdeF).setAttribute("disabled", "true");
-			document.getElementById(idade).setAttribute("disabled", "true");
-		} else {
-			document.getElementById(div).style.display = "inline-block";
-			document.getElementById(qtdeF).removeAttribute("disabled");
-			document.getElementById(idade).removeAttribute("disabled");
-		}
-	}
-	
-	function enableCheckBox(div, chBox){
-			if(chBox.checked) {
-				document.getElementById(div).style.display = "inline-block";
-	      		document.getElementById(div).removeAttribute("disabled");
-			} else {
-				document.getElementById(div).style.display = "none";
-				document.getElementById(div).setAttribute("disabled", "true");
-			}
-		}
-
-</script>
+<link rel="stylesheet" type="text/css" href='<spring:url value="css/modify.css"/>'>
+<script type="text/javascript" src="js/functions.js"></script>
 
 <spring:url value="/respostas/salva" var="salva"></spring:url>
 	
 </head>
-	
 <body>
 	<header style="background-image: url('images/motion_marca2.gif');">
 		<div class="container-fluid">
@@ -63,14 +25,12 @@
 				<p class="lead"  style="color: white;">Por favor, preencha o formulário</p>
 		</div>
 	</header>
-	
 	<div class="container">
 		<form:form action="${salva}" modelAttribute="respostaWrapper" method="POST">
-
 			<c:forEach items="${listaQuestoes}" var="questao" varStatus="i">
 				<form:hidden path="listaResposta[${i.index}].colaborador"         value="1"/> <!-- id 1 temporario-->
 				<form:hidden path="listaResposta[${i.index}].questao"             value="${questao.id}"/>
-				<form:hidden path="listaComplementoResposta[${i.index}].resposta" value="${questao.id}"/> <!-- gerando lista complemento do mesmo tamanho da de questao -->
+				<form:hidden path="listaComplementoResposta[${i.index}].resposta" value="${questao.id}"/>
 				<div class="form-group">
 					<div class="card text-white" id="card">
 						<div class="card-header" id="card-header">
@@ -78,26 +38,22 @@
 						</div>
 						<div class="card-body" id="card-body">
 							<c:choose>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'TEXTO'}">
-									<form:input path="listaResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Questao ${questao.id}" id="questao${questao.id}" maxlength="200" style="width: 100%;" required="true"/>
+									<form:input path="listaResposta[${i.index}].descricao" type="text" class="form-control" placeholder="Questao ${questao.id}" id="questao${questao.id}" maxlength="200" style="width: 100%; background-color: #252525; color: white;" required="true"/>
 								</c:when>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'DROPDOWN'}">
 									<select name="selectOption" class="selectpicker">
-										<option selected>Escolha</option>
+										<option selected style="background-color: #252525; color: white;">Escolha</option>
 										<c:forEach items="${listaOpcoesQuestao}" var="opcao">
 											<c:if test="${questao.id == opcao.questao.id}">
-												<option value="${opcao.descricao}">${opcao.descricao}</option>
+												<option value="${opcao.descricao}" style="background-color: #252525; color: white;">${opcao.descricao}</option>
 											</c:if>
 										</c:forEach> 
 									</select>
 								</c:when>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'CHECKBOX'}">
 									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
 										<c:if test="${questao.id == opcao.questao.id}">
-											
 											<c:choose>
 												<c:when test="${opcao.descricao == 'NAO' }">
 													<form:radiobutton path="listaResposta[${i.index}].descricao" value="${opcao.descricao}" id="${opcao.id}"  onclick="ynCheck(this, 'complemento${questao.id}', '${opcao.descricao}')"/>${opcao.descricao}
@@ -113,7 +69,6 @@
 										</c:if>
 									</c:forEach>
 								</c:when>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'MULTICHECKBOX'}">
 									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
 										<c:if test="${questao.id == opcao.questao.id}">
@@ -124,44 +79,37 @@
 										    </div>
 										</c:if>
 									</c:forEach>
-									
 								</c:when>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'FILHO' }">
-								
 									<c:forEach items="${listaOpcoesQuestao}" var="opcao">
 										<c:if test="${questao.id == opcao.questao.id}">
-												
 											<c:if test="${opcao.descricao == 'NAO' }">
 												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck2(this, 'complemento${questao.id}', qtdeFilho, idadeFilho, '${opcao.descricao}')"/>${opcao.descricao}
 											</c:if>
 											<c:if test="${opcao.descricao == 'SIM' }">
 												<form:radiobutton path="listaResposta[${i.index}].descricao" id="${opcao.id}" value="${opcao.descricao}" onclick="ynCheck2(this, 'complemento${questao.id}', qtdeFilho, idadeFilho, '${opcao.descricao}')"/>${opcao.descricao}
 													<div id="complemento${questao.id}" style="display: none;">
-														<input name="listaResposta[${i.index}].descricao" type="number" min="1" placeholder="Quantos?" id="qtdeFilho" style="width: 25%; text-align: center;">
-														<input name="listaComplementoResposta[${i.index}].descricao" class="text" placeholder="Idade(s)" id="idadeFilho" >
+														<input name="listaResposta[${i.index}].descricao" type="number" min="1" placeholder="Quantos?" id="qtdeFilho" style="width: 25%; text-align: center;" disabled="disabled">
+														<input name="listaComplementoResposta[${i.index}].descricao" class="text" placeholder="Idade(s)" id="idadeFilho" disabled="disabled">
 													</div>
 											</c:if>	
 										</c:if>
 									</c:forEach>
 								</c:when>
-								
 								<c:when test="${questao.tipoEntradaQuestao.descricao == 'DROPDOWN-MULTIPLE' }">
-									<select name="listaResposta[${i.index}].descricao" class="selectpicker" multiple>
+									<select name="listaResposta[${i.index}].descricao" class="selectpicker btn-group dropright" multiple>
 										<c:forEach items="${listaOpcoesQuestao}" var="opcao">
 											<c:if test="${questao.id == opcao.questao.id}">
-												<option value="${opcao.descricao}">${opcao.descricao}</option>
+												<option value="${opcao.descricao}" style="background-color: #252525; color: white;">${opcao.descricao}</option>
 											</c:if>
 										</c:forEach>
 									</select>
 								</c:when>
-								
 							</c:choose>
 						</div>
 					</div>
 				</div>				
 			</c:forEach>
-			
 			<button type="submit" class="btn btn-outline-dark btn-lg btn-block">SUBMIT</button>
 		</form:form>	
 	</div>
