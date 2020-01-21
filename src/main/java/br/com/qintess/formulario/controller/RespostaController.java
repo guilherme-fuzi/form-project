@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.com.qintess.formulario.dao.ComplementoRespostaRepository;
-import br.com.qintess.formulario.dao.OpcoesQuestaoRepository;
-import br.com.qintess.formulario.dao.QuestaoRepository;
-import br.com.qintess.formulario.dao.RespostaRepository;
 import br.com.qintess.formulario.entidades.ComplementoResposta;
 import br.com.qintess.formulario.entidades.Questao;
 import br.com.qintess.formulario.entidades.Resposta;
+import br.com.qintess.formulario.repository.ComplementoRespostaRepository;
+import br.com.qintess.formulario.repository.OpcoesQuestaoRepository;
+import br.com.qintess.formulario.repository.QuestaoRepository;
+import br.com.qintess.formulario.repository.RespostaRepository;
 import br.com.qintess.formulario.wrapper.RespostaListaWrapper;
 
 @Controller
@@ -52,7 +52,7 @@ public class RespostaController {
 	
 	private RespostaListaWrapper OpcaoRespostaBind(String[] opcoes, RespostaListaWrapper respostas) {
 		for (String str : opcoes) {
-			Integer questaoId = opcoesRepository.buscaQuestaoIdPelaOpcao(str); 
+			Long questaoId = opcoesRepository.buscaQuestaoIdPelaOpcao(str); 
 			if(questaoId != null) {
 				Questao q = questaoRepository.findById(opcoesRepository.buscaQuestaoIdPelaOpcao(str)).get(); 
 				for(Resposta r : respostas.getListaResposta()) { 									

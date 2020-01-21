@@ -21,7 +21,7 @@ public class ComplementoResposta {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="descricao", nullable=false, length=250)
 	private String descricao;

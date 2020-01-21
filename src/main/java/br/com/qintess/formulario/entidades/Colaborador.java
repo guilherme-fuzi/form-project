@@ -22,7 +22,7 @@ public class Colaborador {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="nome", nullable=false, length=120)
 	private String nome;

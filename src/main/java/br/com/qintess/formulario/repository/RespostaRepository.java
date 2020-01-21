@@ -1,6 +1,4 @@
-package br.com.qintess.formulario.dao;
-
-
+package br.com.qintess.formulario.repository;
 
 import java.util.List;
 
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.qintess.formulario.entidades.Resposta;
 
 @Repository
-public interface RespostaRepository extends JpaRepository<Resposta, Integer>{
+public interface RespostaRepository extends JpaRepository<Resposta, Long>{
 
 	@Query(value="SELECT r.id, r.descricao, r.colaborador_id, r.questao_id, r.data_envio\n" + 
 			"FROM resposta AS r\n" + 

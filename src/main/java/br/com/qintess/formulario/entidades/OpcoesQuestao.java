@@ -20,7 +20,7 @@ public class OpcoesQuestao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(name="descricao", nullable=false, length=100)
 	private String descricao;

@@ -28,14 +28,14 @@ public class Resposta {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="descricao", nullable=false, length=250)
 	private String descricao;
 	
 	@Column(name="data_envio", nullable=false)
 	@CreationTimestamp
-	private Date data_envio;
+	private Date dataEnvio;
 	
 	@ManyToOne
 	@JoinColumn(name="questao_id")

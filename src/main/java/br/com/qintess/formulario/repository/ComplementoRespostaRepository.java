@@ -1,4 +1,4 @@
-package br.com.qintess.formulario.dao;
+package br.com.qintess.formulario.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.qintess.formulario.entidades.ComplementoResposta;
 
 @Repository
-public interface ComplementoRespostaRepository extends JpaRepository<ComplementoResposta, Integer> {
+public interface ComplementoRespostaRepository extends JpaRepository<ComplementoResposta, Long> {
 
 }

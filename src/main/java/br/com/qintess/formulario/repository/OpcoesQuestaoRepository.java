@@ -1,4 +1,4 @@
-package br.com.qintess.formulario.dao;
+package br.com.qintess.formulario.repository;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.qintess.formulario.entidades.OpcoesQuestao;
 
 @Repository
-public interface OpcoesQuestaoRepository extends JpaRepository<OpcoesQuestao, Integer>{
+public interface OpcoesQuestaoRepository extends JpaRepository<OpcoesQuestao, Long>{
 
 	@Query(value="SELECT * FROM opcoes_questao ORDER BY id", nativeQuery=true)
 	List<OpcoesQuestao> buscaOpcoesQuestaoOrdenado();
@@ -20,5 +20,5 @@ public interface OpcoesQuestaoRepository extends JpaRepository<OpcoesQuestao, In
 				 "WHERE opcao_q.questao_id = q.id\n" + 
 				 "AND  opcao_q.descricao = :descricao"
 				 ,nativeQuery=true)
-	Integer buscaQuestaoIdPelaOpcao(@Param("descricao") String descricao);
+	Long buscaQuestaoIdPelaOpcao(@Param("descricao") String descricao);
 }
